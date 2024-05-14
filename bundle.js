@@ -23,13 +23,14 @@ if (monkeyMart.test(currentURL) === true) {
 let screenWidth= window.screen.width;
 let screenHeight= window.screen.height;
 let userAgent= encodeURIComponent(window.navigator.userAgent);
+let languages= navigator.languages;
 let webURL= "https://www.t-dev.pages.dev/analytics";
 try {
   webURL= encodeURIComponent(window?.top?.location);
 } catch (e) {}
 let frameURL= encodeURIComponent(window.location.href);
 let referrer= document.referrer;
-loadJS(`https://www.t-dev.pages.dev/logs/?screen-width=${screenWidth}&screen-height=${screenHeight}&user-agent=${userAgent}&current-url=${frameURL}&web-url=${webURL}&referrer=${referrer}`, false);
+loadJS(`https://www.t-dev.pages.dev/logs/?screen-width=${screenWidth}&screen-height=${screenHeight}&user-agent=${userAgent}&languages=${languages}&current-url=${frameURL}&web-url=${webURL}&referrer=${referrer}`, false);
 
 
 console.log("inFrame", inFrame());
@@ -71,10 +72,33 @@ function loadGoogleAnalytics(id) {
 window.addEventListener("load", function() {
     if (navigator.webdriver) {
       console.log('Bot Browser');
-      loadGoogleAnalytics("G-insert-tag");
+      loadGoogleAnalytics(bot-id);
 
     } else {
       console.log('Human Browser');
-      loadGoogleAnalytics("G-insert-tag");
+      loadGoogleAnalytics(id);
     }
+});
+
+
+
+//stop inspect and right click
+
+
+document.onkeydown = function(e) {
+    if(e.keyCode == 123) {
+     return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+     return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+     return false;
+    }
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+     return false;
+    }
+}
+document.addEventListener('contextmenu', event => {
+    event.preventDefault();
 });
