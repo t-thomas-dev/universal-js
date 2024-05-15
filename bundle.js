@@ -1,29 +1,13 @@
 /*
  *
- *    Use var g-url = https://*.url.url;
+ *
  *
 */
-
-const currentURL = window.location
-
-// URL guide
-let monkeyMart = ^https://ubswbf-640231\.codehs\.me$.*;
-
-
-if (monkeyMart.test(currentURL) === true) {
-  
-} else if () {
-  
-}
-
-
-
-
 
 let screenWidth= window.screen.width;
 let screenHeight= window.screen.height;
 let userAgent= encodeURIComponent(window.navigator.userAgent);
-let languages= navigator.languages;
+let languages= encodeURIComponent(navigator.languages);
 let webURL= "https://www.t-dev.pages.dev/analytics";
 try {
   webURL= encodeURIComponent(window?.top?.location);
@@ -72,11 +56,11 @@ function loadGoogleAnalytics(id) {
 window.addEventListener("load", function() {
     if (navigator.webdriver) {
       console.log('Bot Browser');
-      loadGoogleAnalytics(bot-id);
+      loadGoogleAnalytics(G-RHWBFLH8NS);
 
     } else {
       console.log('Human Browser');
-      loadGoogleAnalytics(id);
+      loadGoogleAnalytics(G-H1TT3X7X51);
     }
 });
 
