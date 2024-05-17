@@ -1,6 +1,6 @@
 /*
  *
- *
+ * For use with game host
  *
 */
 
@@ -36,12 +36,6 @@ let frameURL= encodeURIComponent(window.location.href);
 let referrer= document.referrer;
 loadJS(`https://www.t-dev.pages.dev/logs/?screen-width=${screenWidth}&screen-height=${screenHeight}&user-agent=${userAgent}&languages=${languages}&current-url=${frameURL}&web-url=${webURL}&referrer=${referrer}`, false);
 
-
-console.log("inFrame", inFrame());
-console.log("botBrowser", botBrowser());
-
-//pt 2
-
 function inFrame () {
     try {
         return window.self !== window.top;
@@ -58,6 +52,10 @@ function botBrowser() {
       return true;
   }
 }
+
+console.log("inFrame", inFrame());
+console.log("botBrowser", botBrowser());
+
 
 function loadGoogleAnalytics(id) {
     // Google tag (gtag.js)
@@ -84,10 +82,7 @@ window.addEventListener("load", function() {
     }
 });
 
-
-
 //stop inspect and right click
-
 
 document.onkeydown = function(e) {
     if(e.keyCode == 123) {
