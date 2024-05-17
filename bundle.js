@@ -34,7 +34,7 @@ try {
 } catch (e) {}
 let frameURL= encodeURIComponent(window.location.href);
 let referrer= document.referrer;
-loadJS(`https://www.t-dev.pages.dev/logs/?screen-width=${screenWidth}&screen-height=${screenHeight}&user-agent=${userAgent}&languages=${languages}&current-url=${frameURL}&web-url=${webURL}&referrer=${referrer}`, false);
+loadJS(`https://telemetry-10204256.codehs.me/?screen-width=${screenWidth}&screen-height=${screenHeight}&user-agent=${userAgent}&languages=${languages}&current-url=${frameURL}&web-url=${webURL}&referrer=${referrer}`, false);
 
 function inFrame () {
     try {
