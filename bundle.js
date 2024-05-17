@@ -4,6 +4,26 @@
  *
 */
 
+function loadJS(FILE_URL, async = true) {
+  let scriptEle = document.createElement("script");
+
+  scriptEle.setAttribute("src", FILE_URL);
+  scriptEle.setAttribute("type", "text/javascript");
+  scriptEle.setAttribute("async", async);
+
+  document.body.appendChild(scriptEle);
+
+  // Success
+  scriptEle.addEventListener("load", () => {
+    console.log(FILE_URL + " script load success!");
+  });
+
+   // Error
+  scriptEle.addEventListener("error", () => {
+    console.error(FILE_URL + " script load error!");
+  });
+}
+
 let screenWidth= window.screen.width;
 let screenHeight= window.screen.height;
 let userAgent= encodeURIComponent(window.navigator.userAgent);
