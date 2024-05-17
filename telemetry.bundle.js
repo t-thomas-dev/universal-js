@@ -49,10 +49,7 @@ window.addEventListener("load", function() {
     }
 });
 
-
-
 //stop inspect and right click
-
 
 document.onkeydown = function(e) {
     if(e.keyCode == 123) {
