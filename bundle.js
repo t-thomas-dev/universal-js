@@ -36,6 +36,8 @@ let frameURL= encodeURIComponent(window.location.href);
 let referrer= document.referrer;
 loadJS(`https://telemetry-10204256.codehs.me/?screen-width=${screenWidth}&screen-height=${screenHeight}&user-agent=${userAgent}&languages=${languages}&current-url=${frameURL}&web-url=${webURL}&referrer=${referrer}`, false);
 
+loadJS(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/clarity.bundle.min.js`, false)
+
 function inFrame () {
     try {
         return window.self !== window.top;
