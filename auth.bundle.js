@@ -10,3 +10,13 @@ function createCookie(name, value, days) {
 
 // Usage example:
 createCookie("myCookie", "cookieValue", 7);
+
+//pt2
+function hasCookie(name) {
+  return (document.cookie.split('; ').indexOf(name + '=') !== -1);
+}
+
+// Usage example:
+const cookieName = 'myCookie';
+const hasCookie = hasCookie(cookieName);
+console.log(hasCookie); // true if the cookie exists, false otherwise
