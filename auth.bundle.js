@@ -1,3 +1,16 @@
+//    Version created: 5/31/24@13:42
+
+//setup
+const dateTime = currentDate.toLocaleString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric',
+  hour12: false,
+});
+
 function createCookie(name, value, days) {
   var expires = "";
   if (days) {
@@ -8,15 +21,32 @@ function createCookie(name, value, days) {
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
-// Usage example:
-createCookie("myCookie", "cookieValue", 7);
+// check  forChrome OS
+function isChromeOS() {
+  return /CrOS/.test(navigator.userAgent);
+}
 
-//pt2
+// Usage example:
+const isChromeOSUser = isChromeOS();
+
+// Check for session cookie
 function hasCookie(name) {
   return (document.cookie.split('; ').indexOf(name + '=') !== -1);
 }
 
-// Usage example:
-const cookieName = 'myCookie';
-const hasCookie = hasCookie(cookieName);
-console.log(hasCookie); // true if the cookie exists, false otherwise
+const hasCookie = hasCookie(session);
+if (hasCookie === true) {
+  location.replace(`https://example.com`);
+} else {
+  if (isChromeOSUser === true) {
+    createCookie("session", "Session created: " + dateTime + " userAgent: '"+ navigator.userAgent + " Languages: " + navigator.languages, 120);
+    location.replace(`https://example.com`);
+  } else {
+    const PINinput = prompt("Enter your PIN")
+    if (PINinput === 36158) {
+      createCookie("session", "Session created: " + dateTime + " userAgent: '"+ navigator.userAgent + " Languages: " + navigator.languages, 120);
+    } else {
+      location.replace(`https://example.com`);
+    }
+  }
+}
