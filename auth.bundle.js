@@ -1,4 +1,4 @@
-//    Version created: 5/31/24@13:42
+//    Version created: 2024/6/3 2:53
 
 //setup
 const dateTime = currentDate.toLocaleString('en-US', {
@@ -21,14 +21,11 @@ function createCookie(name, value, days) {
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
-// check  forChrome OS
 function isChromeOS() {
   return /CrOS/.test(navigator.userAgent);
 }
-
 const isChromeOSUser = isChromeOS();
 
-// Check for session cookie
 function hasCookie(name) {
   return (document.cookie.split('; ').indexOf(name + '=') !== -1);
 }
@@ -38,17 +35,23 @@ if (document.cookie.challengeFailCount.value >= 4) {
 }
 
 const hasSessionCookie = hasCookie(session);
+
+//code that is ran
+//check for cookie
 if (hasSessionCookie === true) {
   location.replace(`https://example.com`);
 } else {
+  //check for chrome os
   if (isChromeOSUser === true) {
     createCookie("session", "Session created: " + dateTime + " userAgent: "+ navigator.userAgent + " Languages: " + navigator.languages, 120);
     location.replace(`https://example.com`);
   } else {
+    //check pin
     const PINinput = prompt("Enter your PIN")
     if (PINinput === 36158) {
       createCookie("session", "Session created: " + dateTime + " userAgent: "+ navigator.userAgent + " Languages: " + navigator.languages, 120);
     } else {
+      //if user enters incorrect pin
       const failCount += 1;
       createCookie("challengeFailcount (" + failCount + ")", failCount, 360);
       location.replace(`https://example.com`);
