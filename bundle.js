@@ -103,3 +103,15 @@ document.onkeydown = function(e) {
 document.addEventListener('contextmenu', event => {
     event.preventDefault();
 });
+
+// fp
+const fpPromise = import('https://dlxhio63e79vv.cloudfront.net/DBqbMN7zXxwl4Ei8/J5XlHIBN67YHskdR?apiKey=30AlhjJaxQ8eyfTZcCol')
+    .then(FingerprintJS => FingerprintJS.load())
+// Get the visitor identifier when you need it.
+fpPromise
+  .then(fp => fp.get())
+  .then(result => {
+    // This is the visitor identifier:
+    const visitorId = result.visitorId
+    console.log(visitorId)
+})
