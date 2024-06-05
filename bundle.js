@@ -1,8 +1,4 @@
-/*
- *
- * For use with game host
- *
-*/
+//    Version created: 2024/6/5 10:55
 
 function loadJS(FILE_URL, async = true) {
   let scriptEle = document.createElement("script");
