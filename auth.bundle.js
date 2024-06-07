@@ -11,6 +11,9 @@ const dateTime = currentDate.toLocaleString('en-US', {
   hour12: false,
 });
 
+const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+console.log(userTimezone);
+
 function createCookie(name, value, days) {
   var expires = "";
   if (days) {
