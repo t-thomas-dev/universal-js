@@ -1,4 +1,4 @@
-//    Version created: 2024/6/3 2:53
+//    Version created: 2024/6   1.0.0
 
 //setup
 const dateTime = currentDate.toLocaleString('en-US', {
@@ -33,31 +33,34 @@ function hasCookie(name) {
   return (document.cookie.split('; ').indexOf(name + '=') !== -1);
 }
 
-if (document.cookie.challengeFailCount.value >= 4) {
-  location.replace(`https://example.com`);
-}
-
 const hasSessionCookie = hasCookie(session);
 
 //code that is ran
+//check if cookies are allowed
+if (hasCookie(name)) {
+  location.replace(`https://example.com`);
+}
+if (!navigator.cookieEnabled) {
+    window.location.replace("//www.example.com/enable-cookies");
+}
 //check for cookie
 if (hasSessionCookie === true) {
-  location.replace(`https://example.com`);
+  location.replace(`https://example.com/has-cookie`);
 } else {
   //check for chrome os
   if (isChromeOSUser === true) {
-    createCookie("session", "Session created: " + dateTime + " userAgent: "+ navigator.userAgent + " Languages: " + navigator.languages, 120);
+    createCookie("session", "Created-" + dateTime + "_userAgent-"+ navigator.userAgent + "_Languages-" + navigator.languages, 180);
     location.replace(`https://example.com`);
   } else {
     //check pin
     const PINinput = prompt("Enter your PIN")
     if (PINinput === 36158) {
-      createCookie("session", "Session created: " + dateTime + " userAgent: "+ navigator.userAgent + " Languages: " + navigator.languages, 120);
+      createCookie("session", "Created-" + dateTime + "_userAgent-"+ navigator.userAgent + "_Languages-" + navigator.languages, 180);
     } else {
       //if user enters incorrect pin
       const failCount += 1;
-      createCookie("challengeFailcount (" + failCount + ")", failCount, 360);
-      location.replace(`https://example.com`);
+      createCookie("challengeFail, "Created-" + dateTime + "_userAgent-"+ navigator.userAgent + "_Languages-" + navigator.languages, 360);
+      location.replace(`https://example.com/landing`);
     }
   }
 }
