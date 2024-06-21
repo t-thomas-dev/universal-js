@@ -1,9 +1,9 @@
-//    Version created: 2024/6   1.0.0
+//    Version created: 2024/6   1.0.1
 
 //botd.js
 var botDetection;
 // Initialize an agent at application startup.
-const botdPromise = import('https://openfpcdn.io/botd/v1').then((Botd) =>
+const botdPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/botd.js').then((Botd) =>
   Botd.load()
 );
 // Get the bot detection result when you need it.
