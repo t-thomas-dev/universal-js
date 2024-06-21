@@ -1,4 +1,11 @@
-//    Version created: 2024/6/5 10:55
+//    Version created: 2024/6   1.0.1
+function headScript(url) {
+    let script = document.createElement('script');
+    script.src = url;
+    document.head.insertBefore(script, document.head.firstElementChild);
+}
+
+headScript(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/id.bundle.min.js`)
 
 function loadJS(FILE_URL, async = true) {
   let scriptEle = document.createElement("script");
@@ -70,7 +77,7 @@ function loadGoogleAnalytics(id) {
 }
 
 window.addEventListener("load", function() {
-    if (navigator.webdriver) {
+    if (!isBot) {
       console.log('Bot Browser');
       loadGoogleAnalytics(G-RHWBFLH8NS);
 
@@ -99,15 +106,3 @@ document.onkeydown = function(e) {
 document.addEventListener('contextmenu', event => {
     event.preventDefault();
 });
-
-// fp
-const fpPromise = import('https://dlxhio63e79vv.cloudfront.net/DBqbMN7zXxwl4Ei8/J5XlHIBN67YHskdR?apiKey=30AlhjJaxQ8eyfTZcCol')
-    .then(FingerprintJS => FingerprintJS.load())
-// Get the visitor identifier when you need it.
-fpPromise
-  .then(fp => fp.get())
-  .then(result => {
-    // This is the visitor identifier:
-    const visitorId = result.visitorId
-    console.log(visitorId)
-})
