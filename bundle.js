@@ -1,4 +1,4 @@
-//    Version created: 2024/6   1.0.1
+//    Version created: 2024/6   1.0.2
 function headScript(url) {
     let script = document.createElement('script');
     script.src = url;
@@ -6,6 +6,20 @@ function headScript(url) {
 }
 
 headScript(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/id.bundle.min.js`)
+
+function createCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+createCookie("bot", isBot, 720)
+createCookie("fpId", fpId, 720)
+createCookie("clId", clId, 720)
 
 function loadJS(FILE_URL, async = true) {
   let scriptEle = document.createElement("script");
