@@ -5,7 +5,7 @@ function headScript(url) {
     document.head.insertBefore(script, document.head.firstElementChild);
 }
 
-headScript(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/id.bundle.min.js`)
+headScript(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/id.bundle.js`)
 
 function createCookie(name, value, days) {
   var expires = "";
