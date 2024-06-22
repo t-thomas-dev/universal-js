@@ -1,4 +1,4 @@
-//    Version created: 2024/6   1.0.3
+//    Version created: 2024/6   1.0.4
 
 //botd.js
 var botDetection;
@@ -19,7 +19,7 @@ isBot = checkBotRegex.test(botDetection);
 console.log("Bot:" + isBot);
 
 //fp.js
-const fpPromise = import('//cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/fp.js')
+const fpPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/fp.js')
   .then(FingerprintJS => FingerprintJS.load())
 
 // Get the visitor identifier when you need it.
@@ -32,6 +32,7 @@ fpPromise
 })
 
 //cl.js
+const fpPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/cl.js')
 const ClientJS = window.ClientJS;
 const client = new ClientJS();
 var clID = client.getFingerprint();
