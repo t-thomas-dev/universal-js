@@ -1,4 +1,4 @@
-//    Version created: 2024/6   1.0.2
+//    Version created: 2024/6   1.0.4
 function headScript(url) {
     let script = document.createElement('script');
     script.src = url;
@@ -16,10 +16,6 @@ function createCookie(name, value, days) {
   }
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
-
-createCookie("bot", isBot, 720)
-createCookie("fpId", fpId, 720)
-createCookie("clId", clId, 720)
 
 function loadJS(FILE_URL, async = true) {
   let scriptEle = document.createElement("script");
@@ -91,6 +87,9 @@ function loadGoogleAnalytics(id) {
 }
 
 window.addEventListener("load", function() {
+    createCookie("bot", isBot, 720)
+    createCookie("fpId", fpId, 720)
+    createCookie("clId", clId, 720)
     if (!isBot) {
       console.log('Bot Browser');
       loadGoogleAnalytics(G-RHWBFLH8NS);
