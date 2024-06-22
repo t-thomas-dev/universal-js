@@ -4,7 +4,7 @@
 var botDetection;
 var isBot;
 // Initialize an agent at application startup.
-const botdPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/botd.js').then((Botd) =>
+const botdPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/botd.js').then((Botd) =>
   Botd.load()
 );
 // Get the bot detection result when you need it.
@@ -19,7 +19,7 @@ isBot = checkBotRegex.test(botDetection);
 console.log("Bot:" + isBot);
 
 //fp.js
-const fpPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/fp.js')
+const fpPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/fp.js')
   .then(FingerprintJS => FingerprintJS.load())
 
 // Get the visitor identifier when you need it.
@@ -32,7 +32,7 @@ fpPromise
 })
 
 //cl.js
-const fpPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/cl.js')
+const fpPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/cl.js')
 const ClientJS = window.ClientJS;
 const client = new ClientJS();
 var clID = client.getFingerprint();
