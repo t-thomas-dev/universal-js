@@ -1,4 +1,4 @@
-//    Version created: 2024/6   1.0.4
+//    Version created: 2024/6   1.0.5
 
 //botd.js
 var botDetection;
@@ -32,7 +32,7 @@ fpPromise
 })
 
 //cl.js
-const fpPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/cl.js')
+const clPromise = import('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/cl.js')
 const ClientJS = window.ClientJS;
 const client = new ClientJS();
 var clID = client.getFingerprint();
