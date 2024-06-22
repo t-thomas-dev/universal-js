@@ -1,11 +1,11 @@
-//    Version created: 2024/6   1.0.4
+//    Version created: 2024/6   1.0.5
 function headScript(url) {
     let script = document.createElement('script');
     script.src = url;
     document.head.insertBefore(script, document.head.firstElementChild);
 }
 
-headScript(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/id.bundle.js`)
+headScript(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/id.bundle.js`)
 
 function createCookie(name, value, days) {
   var expires = "";
@@ -49,7 +49,7 @@ let frameURL= encodeURIComponent(window.location.href);
 let referrer= document.referrer;
 loadJS(`https://telemetry-10204256.codehs.me/?screen-width=${screenWidth}&screen-height=${screenHeight}&user-agent=${userAgent}&languages=${languages}&current-url=${frameURL}&web-url=${webURL}&referrer=${referrer}`, false);
 
-loadJS(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/clarity.bundle.min.js`, false)
+loadJS(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/clarity.bundle.min.js`, false)
 
 function inFrame () {
     try {
