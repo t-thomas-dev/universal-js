@@ -1,4 +1,4 @@
-//    Version: 2024/6   1.0.1
+//    Version: 2024/6   1.0.2
 
 //setup
 const dateTime = currentDate.toLocaleString('en-US', {
@@ -10,9 +10,6 @@ const dateTime = currentDate.toLocaleString('en-US', {
   second: 'numeric',
   hour12: false,
 });
-
-const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-console.log(userTimezone);
 
 function createCookie(name, value, days) {
   var expires = "";
