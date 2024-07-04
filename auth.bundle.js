@@ -1,4 +1,4 @@
-//    Version created: 2024/6   1.0.0
+//    Version: 2024/6   1.0.1
 
 //setup
 const dateTime = currentDate.toLocaleString('en-US', {
@@ -33,12 +33,12 @@ function hasCookie(name) {
   return (document.cookie.split('; ').indexOf(name + '=') !== -1);
 }
 
-const hasSessionCookie = hasCookie(session);
+const hasAuthCookie = hasCookie(auth);
 
 //code that is ran
 //check if cookies are allowed
-if (hasCookie(name)) {
-  location.replace(`https://example.com`);
+if (hasCookie(auth)) {
+  location.replace(`https://example.com/already-authed`);
 }
 if (!navigator.cookieEnabled) {
     window.location.replace("//www.example.com/enable-cookies");
@@ -50,7 +50,7 @@ if (hasSessionCookie === true) {
   //check for chrome os
   if (isChromeOSUser === true) {
     createCookie("session", "Created-" + dateTime + "_userAgent-"+ navigator.userAgent + "_Languages-" + navigator.languages, 180);
-    location.replace(`https://example.com`);
+    location.replace(`https://example.com/success`);
   } else {
     //check pin
     const PINinput = prompt("Enter your PIN")
