@@ -1,21 +1,100 @@
-//    Version created: 2024/6   1.0.5
+//    Version created: 2024/7   2.0.0
+
 function headScript(url) {
     let script = document.createElement('script');
     script.src = url;
     document.head.insertBefore(script, document.head.firstElementChild);
 }
 
-headScript(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/id.bundle.js`)
+headScript('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/nr.js')
+headScript('https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/cl.js')
+
+//cookie functions
+function hasCookie(name) {
+  // Get all cookies
+  const cookies = document.cookie.split(';');
+
+  // Loop through each cookie
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+
+    // Check if cookie name starts with "auth="
+    if (cookie.indexOf(`${name}=`) === 0) {
+        return true;
+    }
+  }
+  // No cookies enabled or auth cookie not found
+  return false;
+}
 
 function createCookie(name, value, days) {
   var expires = "";
   if (days) {
-    var date = new Date();
+    let date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toUTCString();
   }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  document.cookie = name + "=" + (value || "") + expires + "";
 }
+function deleteCookie(cookieName) {
+  document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;domain=codehs.me';
+}
+
+function createTempCookie(name, value) {
+  document.cookie = name + "=" + value + ";domain=codehs.me";
+}
+
+function isChromeOS() {
+  return /CrOS/.test(navigator.userAgent);
+}
+
+var authState = `hasAuth:${hasCookie('auth')}--hasBlock:${hasCookie('accessBlock')}`;
+
+//telemetry
+let screenWidth = window.screen.width;
+let screenHeight = window.screen.height;
+let userAgent = encodeURIComponent(window.navigator.userAgent);
+let languages = encodeURIComponent(navigator.languages);
+let webURL = "https://www.t-dev.pages.dev/analytics";
+try {
+  webURL= encodeURIComponent(window?.top?.location);
+} catch (e) {console.error(e)}
+let frameURL = encodeURIComponent(window.location.href);
+let referrer = document.referrer;
+
+document.addEventListener('readystatechange', event => {
+  if (event.target.readyState === "complete") {
+    setTimeout(function(){
+      createTempCookie("sessionId", sessionId)
+      createCookie("bot", `${isBot}`, 720)
+      createCookie("fpId", fpId, 720)
+      createCookie("clId", clId, 720)
+      //userData nr data loggging
+      rawUserData = `sessionId-${sessionId}--bot-${isBot}--fpId-` + `${String(fpId)}` + `--clId-` + `${String(clId)}` + `--userAgent-${encodeURIComponent(userAgent)}--languages-${languages}--authState:${authState}`;
+      userData = `sessionId:${sessionId}--bot:${isBot}--fpId:` + `${String(fpId)}` + `--clId:` + `${String(clId)}` + `--userAgent:${decodeURIComponent(userAgent)}--languages:${decodeURIComponent(languages)}--authState:${authState}`;
+      console.log(userData);
+      //newrelic.setUserId(`fpId-${fpId}--clId-${clId}`);
+      newrelic.log(`${userData} ----TELEMETRY---- screen-width:${screenWidth}--screen-height:${screenHeight}--current-url:${decodeURIComponent(frameURL)}--web-url:${decodeURIComponent(webURL)}--referrer:${decodeURIComponent(referrer)}`);
+      if (!isChromeOS()) {
+        newrelic.log(`session is not CrOS--${sessionId}`, {level: 'warn'})
+      }
+      if (!hasCookie('auth')) {
+        newrelic.log(`session has no auth--${sessionId}`, {level: 'warn'})
+        window.location.replace(`/401.html`);
+      }
+      if (hasCookie('accessBlock')) {
+        newrelic.log(`session has access block--${sessionId}`, {level: 'warn'})
+        window.location.replace(`/403.html`);
+      }
+    }, 500);
+  }
+});
+
+//delete sessionId on unload
+const beforeUnloadHandler = (event) => {
+  deleteCookie('sessionId');
+};
+window.addEventListener("beforeunload", beforeUnloadHandler);
 
 function loadJS(FILE_URL, async = true) {
   let scriptEle = document.createElement("script");
@@ -26,30 +105,14 @@ function loadJS(FILE_URL, async = true) {
 
   document.body.appendChild(scriptEle);
 
-  // Success
-  scriptEle.addEventListener("load", () => {
-    console.log(FILE_URL + " script load success!");
-  });
-
-   // Error
   scriptEle.addEventListener("error", () => {
     console.error(FILE_URL + " script load error!");
   });
 }
 
-let screenWidth= window.screen.width;
-let screenHeight= window.screen.height;
-let userAgent= encodeURIComponent(window.navigator.userAgent);
-let languages= encodeURIComponent(navigator.languages);
-let webURL= "https://www.t-dev.pages.dev/analytics";
-try {
-  webURL= encodeURIComponent(window?.top?.location);
-} catch (e) {}
-let frameURL= encodeURIComponent(window.location.href);
-let referrer= document.referrer;
-loadJS(`https://telemetry-10204256.codehs.me/?screen-width=${screenWidth}&screen-height=${screenHeight}&user-agent=${userAgent}&languages=${languages}&current-url=${frameURL}&web-url=${webURL}&referrer=${referrer}`, false);
+loadJS(`/id.bundle.js`)
 
-loadJS(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js@master/clarity.bundle.min.js`, false)
+loadJS(`https://cdn.jsdelivr.net/gh/t-thomas-dev/universal-js/clarity.bundle.min.js`, false)
 
 function inFrame () {
     try {
@@ -59,18 +122,7 @@ function inFrame () {
     }
 }
 
-
-function botBrowser() {
-  try {
-    return navigator.webdriver
-  } catch (e) {
-      return true;
-  }
-}
-
 console.log("inFrame", inFrame());
-console.log("botBrowser", botBrowser());
-
 
 function loadGoogleAnalytics(id) {
     // Google tag (gtag.js)
@@ -84,24 +136,21 @@ function loadGoogleAnalytics(id) {
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', id);
+    gtag('config', id, {
+      'user_id': userData
+    });
 }
 
 window.addEventListener("load", function() {
-    createCookie("bot", isBot, 720)
-    createCookie("fpId", fpId, 720)
-    createCookie("clId", clId, 720)
-    if (!isBot) {
-      console.log('Bot Browser');
-      loadGoogleAnalytics(G-RHWBFLH8NS);
-
+    if (isBot===true) {
+      console.warn('Bot:true');
+      loadGoogleAnalytics("G-RHWBFLH8NS");
     } else {
-      console.log('Human Browser');
-      loadGoogleAnalytics(G-H1TT3X7X51);
+      loadGoogleAnalytics("G-H1TT3X7X51");
     }
 });
 
 //stop inspect and right click
-
 document.onkeydown = function(e) {
     if(e.keyCode == 123) {
      return false;
